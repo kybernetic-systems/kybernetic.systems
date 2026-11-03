@@ -1,0 +1,24 @@
+[seo]
+title = "Contact"
+description = "Write to Kybernetic Systems. A person reads it."
+
+[intro]
+eyebrow = "Contact"
+title = "Write to us. A person reads it."
+
+[details]
+emailLabel = "Email"
+phoneLabel = "Telephone"
+officeLabel = "Registered office"
+grievancesLabel = "Queries & grievances"
+grievancesBody = "Adit Shah — reachable at the email and number above."
+
+[writeToUs]
+title = "Send us a note"
+body = """
+Questions about the company, the products, or working together. Your email app opens with a new \
+message to us."""
+ctaLabel = "Write to us"
+privacyNote = """
+Writing to us means we store your name, email address and message to reply to you, as described in \
+our [privacy notice](/privacy)."""

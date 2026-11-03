@@ -1,0 +1,21 @@
+[seo]
+title = "Products"
+description = """
+What we are building, and why. Mangrove is the first: a place to build the things a group \
+needs and run them on the computers you already own."""
+
+[intro]
+eyebrow = "Products"
+title = "How we plan to shape a better world"
+lead = """
+The systems we adopt shape us — what we notice, how we think, and what we end up doing. That \
+happens whether anybody intended it or not, so the only question worth asking is who the \
+shaping serves. We build systems that answer to the people inside them."""
+
+[notify]
+title = "Hear about what we release"
+body = "One email when there is something new. Nothing else, ever."
+ctaLabel = "Email us to be notified"
+privacyNote = """
+Sending this email asks us to store your email address for this one purpose. Withdraw any \
+time — see our [privacy policy](/privacy)."""

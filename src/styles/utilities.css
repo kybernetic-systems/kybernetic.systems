@@ -1,0 +1,46 @@
+/* Mono uppercase section label: the most repeated snippet in the design. */
+@utility eyebrow {
+	font-family: var(--font-mono);
+	font-size: var(--text-mono-sm);
+	line-height: var(--text-mono-sm--line-height);
+	letter-spacing: var(--tracking-eyebrow);
+	text-transform: uppercase;
+	color: var(--kyb-accent);
+}
+
+@utility label-mono {
+	font-family: var(--font-mono);
+	font-size: var(--text-mono-sm);
+	line-height: var(--text-mono-sm--line-height);
+	letter-spacing: var(--tracking-label);
+	text-transform: uppercase;
+}
+
+/* Diagonal stripes for media that doesn't exist yet. */
+@utility bg-hatch {
+	background-image: repeating-linear-gradient(
+		135deg,
+		color-mix(in srgb, var(--kyb-fg) 7%, transparent) 0 8px,
+		transparent 8px 16px
+	);
+}
+
+/* Makes the nearest positioned ancestor clickable through a single link. */
+@utility stretched-link {
+	&::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+	}
+}
+
+/* Header backdrop, with a solid fallback for people who prefer less transparency. */
+@utility bg-frosted {
+	background-color: color-mix(in srgb, var(--kyb-surface) 92%, transparent);
+	backdrop-filter: blur(8px);
+
+	@media (prefers-reduced-transparency: reduce) {
+		background-color: var(--kyb-surface);
+		backdrop-filter: none;
+	}
+}

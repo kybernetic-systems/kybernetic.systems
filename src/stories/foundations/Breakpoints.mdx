@@ -1,0 +1,13 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+import { BreakpointTable } from "./Foundations";
+
+<Meta title="Foundations/Breakpoints" />
+
+# Breakpoints
+
+Classes are mobile-first: base styles target the smallest screen, and `md:` / `lg:` add the desktop
+layout. Every page must reflow at **320px** without horizontal scrolling (WCAG 1.4.10). Patterns
+placed in slots of different widths use container queries instead of viewport breakpoints.
+
+<BreakpointTable />

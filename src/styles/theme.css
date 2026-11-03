@@ -1,0 +1,157 @@
+/*
+ * Design tokens. Components use the semantic tokens (fg, accent, rule, …) only; the brand palette
+ * is for this file and the Foundations stories. Fluid values scale linearly between a 390px and a
+ * 1280px viewport.
+ */
+
+@theme {
+	/* Brand palette */
+	--color-navy: #0a1a3a;
+	--color-paper: #f7f4ed;
+	--color-brass: #a37e44;
+	--color-brass-deep: #8a6934;
+	--color-brass-light: #b8925a;
+	--color-slate: #2a3550;
+	--color-stone: #6b6357;
+
+	/* Typefaces */
+	--font-serif: "EB Garamond Variable", Garamond, "Times New Roman", serif;
+	--font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+	/* Type scale */
+	--text-display-xl: clamp(2.75rem, 1.8736rem + 3.5955vw, 4.75rem);
+	--text-display-xl--line-height: 1.06;
+	--text-display-xl--letter-spacing: -0.015em;
+	--text-display: clamp(2.5rem, 1.8975rem + 2.4719vw, 3.875rem);
+	--text-display--line-height: 1.12;
+	--text-display--letter-spacing: -0.015em;
+	--text-statement: clamp(1.75rem, 1.3666rem + 1.573vw, 2.625rem);
+	--text-statement--line-height: 1.42;
+	--text-statement--letter-spacing: -0.01em;
+	--text-heading-xl: clamp(1.75rem, 1.4761rem + 1.1236vw, 2.375rem);
+	--text-heading-xl--line-height: 1.3;
+	--text-heading-xl--letter-spacing: -0.01em;
+	--text-heading-lg: clamp(1.625rem, 1.4607rem + 0.6742vw, 2rem);
+	--text-heading-lg--line-height: 1.24;
+	--text-heading-lg--letter-spacing: -0.01em;
+	--text-heading-md: clamp(1.4375rem, 1.3279rem + 0.4494vw, 1.6875rem);
+	--text-heading-md--line-height: 1.26;
+	--text-heading-md--letter-spacing: -0.01em;
+	--text-lead: clamp(1.25rem, 1.1678rem + 0.3371vw, 1.4375rem);
+	--text-lead--line-height: 1.65;
+	--text-body-lg: clamp(1.1875rem, 1.1327rem + 0.2247vw, 1.3125rem);
+	--text-body-lg--line-height: 1.72;
+	--text-body: clamp(1.125rem, 1.0976rem + 0.1124vw, 1.1875rem);
+	--text-body--line-height: 1.66;
+	--text-body-sm: clamp(1rem, 0.9726rem + 0.1124vw, 1.0625rem);
+	--text-body-sm--line-height: 1.6;
+	--text-mono-note: 0.8125rem;
+	--text-mono-note--line-height: 1.7;
+	--text-mono-sm: 0.75rem;
+	--text-mono-sm--line-height: 1.4;
+	--text-mono-xs: 0.6875rem;
+	--text-mono-xs--line-height: 1.4;
+
+	/* Tracking */
+	--tracking-eyebrow: 0.28em;
+	--tracking-wordmark: 0.22em;
+	--tracking-label: 0.16em;
+	--tracking-meta: 0.12em;
+
+	/* Widths: page containers and reading measures */
+	--container-page: 72.5rem;
+	--container-statement: 51.25rem;
+	--container-article: 47.5rem;
+	--container-narrow: 43.75rem;
+	--container-measure-sm: 30em;
+	--container-measure: 34em;
+	--container-measure-lg: 42em;
+
+	/* Spacing */
+	--spacing-gutter: clamp(1.25rem, 0.7022rem + 2.2472vw, 2.5rem);
+	--spacing-section-sm: clamp(3.5rem, 2.2949rem + 4.9438vw, 6.25rem);
+	--spacing-section: clamp(4rem, 2.4663rem + 6.2921vw, 7.5rem);
+	--spacing-section-lg: clamp(4.5rem, 2.9115rem + 6.5169vw, 8.125rem);
+	--spacing-split-gap: clamp(1.5rem, -0.3076rem + 7.4157vw, 5.625rem);
+	--spacing-aside: 18.75rem;
+	--spacing-header: clamp(4rem, 3.6713rem + 1.3483vw, 4.75rem);
+	--spacing-mark: clamp(12.5rem, 8.6657rem + 15.7303vw, 21.25rem);
+	--spacing-panel: clamp(1.5rem, 0.6236rem + 3.5955vw, 3.5rem);
+	--spacing-panel-lg: clamp(1.75rem, 0.8188rem + 3.8202vw, 3.875rem);
+
+	/* The design is square everywhere */
+	--radius-*: initial;
+
+	/* Motion: always applied through `motion-safe:` */
+	--animate-rise: rise 1s ease-out both;
+	--animate-fade: fade 1.4s ease-out both;
+	--animate-helm: spin 150s linear infinite reverse;
+
+	@keyframes rise {
+		from {
+			opacity: 0;
+			transform: translateY(14px);
+		}
+		to {
+			opacity: 1;
+			transform: none;
+		}
+	}
+
+	@keyframes fade {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+}
+
+/*
+ * Semantic tokens resolve per tone, so a `data-tone="ink"` section re-themes everything inside it.
+ * `inline` makes utilities reference the `--kyb-*` variables directly. Hand-written CSS must do the
+ * same: `var(--color-fg)` is resolved once on :root and would always give the paper value.
+ */
+@theme inline {
+	--color-surface: var(--kyb-surface);
+	--color-fg: var(--kyb-fg);
+	--color-fg-body: var(--kyb-fg-body);
+	--color-fg-muted: var(--kyb-fg-muted);
+	--color-fg-subtle: var(--kyb-fg-subtle);
+	--color-accent: var(--kyb-accent);
+	--color-decor: var(--kyb-decor);
+	--color-rule: var(--kyb-rule);
+	--color-rule-strong: var(--kyb-rule-strong);
+	--color-focus: var(--kyb-focus);
+	--color-tint: var(--kyb-tint);
+}
+
+:root,
+[data-tone="paper"] {
+	--kyb-surface: var(--color-paper);
+	--kyb-fg: var(--color-navy);
+	--kyb-fg-body: var(--color-slate);
+	--kyb-fg-muted: var(--color-stone);
+	--kyb-fg-subtle: var(--color-stone);
+	--kyb-accent: var(--color-brass-deep);
+	--kyb-decor: var(--color-brass);
+	--kyb-rule: color-mix(in srgb, var(--color-navy) 12%, transparent);
+	--kyb-rule-strong: color-mix(in srgb, var(--color-navy) 18%, transparent);
+	--kyb-focus: var(--color-navy);
+	--kyb-tint: color-mix(in srgb, var(--color-brass) 10%, transparent);
+}
+
+[data-tone="ink"] {
+	--kyb-surface: var(--color-navy);
+	--kyb-fg: var(--color-paper);
+	--kyb-fg-body: color-mix(in srgb, var(--color-paper) 78%, var(--color-navy));
+	--kyb-fg-muted: color-mix(in srgb, var(--color-paper) 72%, var(--color-navy));
+	--kyb-fg-subtle: color-mix(in srgb, var(--color-paper) 50%, var(--color-navy));
+	--kyb-accent: var(--color-brass);
+	--kyb-decor: var(--color-brass);
+	--kyb-rule: color-mix(in srgb, var(--color-brass) 30%, transparent);
+	--kyb-rule-strong: color-mix(in srgb, var(--color-brass) 35%, transparent);
+	--kyb-focus: var(--color-brass);
+	--kyb-tint: color-mix(in srgb, var(--color-brass) 14%, transparent);
+}

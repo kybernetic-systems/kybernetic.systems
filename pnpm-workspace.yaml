@@ -1,0 +1,30 @@
+catalog:
+  vite: npm:@voidzero-dev/vite-plus-core@0.3.1
+  vite-plus: 0.3.1
+  vitest: 4.1.11
+  "@vitest/browser-playwright": 4.1.11
+  "@vitest/coverage-v8": 4.1.11
+overrides:
+  vite@*: "catalog:"
+  vitest@*: "catalog:"
+peerDependencyRules:
+  allowAny:
+    - vite
+    - vitest
+  allowedVersions:
+    vite: "*"
+    vitest: "*"
+minimumReleaseAge: 10080
+allowBuilds:
+  esbuild: true
+  # sharp ships prebuilt binaries as optional dependencies; its install script only compiles from
+  # source when none match the platform, so it stays off.
+  sharp: false
+skills:
+  dirs:
+    - .claude/skills
+permissions:
+  "@tanstack/devtools-vite":
+    skills: true
+  "@tanstack/react-start":
+    skills: true

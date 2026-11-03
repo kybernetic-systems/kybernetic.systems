@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+# gitmoji's picker needs a controlling terminal. A failing `exec` redirection
+# makes a non-interactive shell exit, which would abort the commit, so probe
+# in a subshell first and skip the picker when there is no terminal.
+( exec < /dev/tty ) 2>/dev/null || exit 0
+
+exec < /dev/tty
+vp exec gitmoji --hook "$1" "$2" || true

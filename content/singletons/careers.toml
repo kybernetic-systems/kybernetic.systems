@@ -1,0 +1,104 @@
+[seo]
+title = "Careers"
+description = "Roles at Kybernetic Systems, how we hire, and what a job here pays and includes."
+
+[intro]
+eyebrow = "Careers"
+title = "We hire people who want to learn."
+lead = """
+We build systems that serve the people using them, and everybody here is both learning and \
+teaching, whatever their experience."""
+
+[roles]
+eyebrow = "Roles"
+location = "Mumbai · in person"
+readLabel = "Read the role"
+emptyMessage = "No roles are open right now. Open applications are always read."
+
+[hiring]
+eyebrow = "How We Hire"
+lead = """
+Five steps: two minutes, ten minutes, an hour, a day in our office, and then an answer. The day \
+is paid."""
+
+[[hiring.steps]]
+title = "Two minutes, by email"
+body = """
+A phone number, the times you are free to talk, and one question answered in a few \
+sentences: what do you want to learn on the job? We read them in the order they arrive and keep \
+going until we have found the person, so we will write to everybody once the role is filled."""
+
+[[hiring.steps]]
+title = "Ten minutes on the phone"
+body = """
+A call at a time you chose. Long enough to hear how you think about something you care about, \
+short enough that we can call everybody we ought to. If it goes well, we ask for an hour next."""
+
+[[hiring.steps]]
+title = "An hour, on video"
+body = """
+Half talking and half working: we give you something small, watch how you go at it, and help \
+when you get stuck. Getting stuck is expected — it is most of what we are there to see. \
+Everybody who reaches this call hears back with our reasons, either way."""
+
+[[hiring.steps]]
+title = "A day in the office, paid"
+body = """
+A full day alongside us on a problem we have set — hard enough to be interesting, and long \
+enough to see how we actually work together, which is the whole reason for the day. We tell you \
+the hours beforehand, and everybody who spends the day with us receives ₹1,000 with our thanks. \
+It is a small sum against a day of somebody's time, and we are glad to give it."""
+
+[[hiring.steps]]
+title = "Two working days, in writing"
+body = """
+We decide within two working days of your visit. A yes comes as an offer letter, with the pay, \
+the hours and the date you would start all written down, and you are welcome to take your time \
+over it. A no comes with our reasons."""
+
+[commitments]
+eyebrow = "What The Job Includes"
+body = """
+Pay is written down. Nobody starts below a living wage for the city they live in, and nobody
+earns more than nine times the lowest paid on the payroll. Each role states what it pays.
+
+Time off is earned day by day. Every paid day earns two points, ten points buys a paid day off,
+and you take one without telling us why — which comes to about a day a week across a year. If you
+need a day before you have earned it, take it anyway: the balance goes below zero and costs
+nothing to carry.
+
+Jobs here are meant to last, and nobody loses one for not being good enough at it. Where a role
+has an end date, like an internship, the role says so.
+
+You get a say in the work. Decisions that change what you do, or how you do it, are talked
+through with the people they land on before they are settled.
+
+Nobody counts your hours or watches your screen. You get a problem and decide how to solve it
+yourself. Saying you are stuck, or that you broke something, is ordinary here, starting with the
+people in charge."""
+
+[honesty]
+eyebrow = "What You Would Be Joining"
+body = """
+You would be joining early, while the company is small. Every decision is close enough to touch,
+and a say here means a decision can come out the other way.
+
+We work in short cycles, and would rather be corrected early than be right too late. This is the
+right year to join if you have wanted to watch a company get built from the ground up."""
+
+[openApplication]
+title = "Nothing here fits you?"
+body = """
+Send the same three things and say what you are hoping to do here. Open applications are read by \
+a person."""
+ctaLabel = "Write to us"
+
+[rolePage]
+backLabel = "All roles"
+applyTitle = "Interested?"
+applyBody = """
+Send us a phone number, the times you are free for a ten minute call, and your answer to one \
+question. The email opens with the three prompts; that is the whole application."""
+applyCtaLabel = "Register interest"
+closedNotice = "This role is closed. It stays here for reference; see the open roles instead."
+contentsLabel = "On this page"

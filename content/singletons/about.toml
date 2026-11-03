@@ -1,0 +1,95 @@
+[seo]
+title = "About"
+description = """
+A company built around one belief: systems should serve the people who depend on them, not the \
+reverse."""
+
+[intro]
+eyebrow = "About"
+title = """
+A company built around one belief: systems should serve the people who depend on them, not the \
+reverse."""
+
+[thinking]
+eyebrow = "The Thinking"
+body = """
+Most bad systems are not broken. They run as designed, hit their targets and pass their audits —
+for someone. The useful question about any system is not whether it works but who it works for,
+and the answer is rarely everyone standing inside it. Take a support queue measured in response
+time: it serves the dashboard, not the person answering and not the person waiting.
+
+A better design follows two rules. Build on what people are good at instead of forcing them into
+work they are bad at — people are superb at conversation and poor at being a waiting line. And
+inform rather than control: a warning that something looks wrong is information, while a tool that
+polices how someone works is control wearing quality's clothes.
+
+Neither rule can be settled from outside. A written plan is a snapshot of what someone understood
+on a Tuesday, and by the time the work is finished the world has moved and the snapshot is a
+fossil. So we build the smallest honest thing, put it in front of a real person, and let what
+comes back change the plan — steering by what we notice, rather than by what we predicted.
+
+We hold the same standard for ourselves. The company is a system too, we are the people who
+depend on it, and it is meant to get better at getting better."""
+
+[values]
+eyebrow = "What We Value"
+
+[[values.items]]
+title = "Human Dignity"
+body = """
+Everybody should be treated like an adult. Here that means you are handed a problem and \
+trusted to solve it your own way, and nobody is counting your hours while you do. In what we \
+build it means software that tells you what it knows and leaves the decision to you, because \
+the person doing the work knows things the software never will."""
+
+[[values.items]]
+title = "Sovereignty"
+body = """
+The tools you depend on should answer to you, not to the company that made them. So you can \
+run our software on the computers you already own, and keep your work where you can reach it. \
+You get the source code, the instructions it is built from, to read and to change. If we \
+disappeared tomorrow, none of it would stop working."""
+
+[[values.items]]
+title = "Democracy at Work"
+body = """
+People spend a quarter of their adult life at work. We believe that you should have a real say \
+in your work life: what the company takes on, how the work gets done, and what happens to the \
+money it earns. If a decision affects you, you have a say in it."""
+
+[[values.items]]
+title = "Psychological Safety"
+body = """
+Imagine saying "I broke something", "I do not understand this", or "I need help", and watching \
+your teammates turn up to help. That is what working here should feel like, and creating it is \
+the job of whoever is in charge. Leaders go first and say these things out loud themselves, so \
+that by the time you need to, it is already an ordinary thing to say."""
+
+[[values.items]]
+title = "Financial Security"
+body = """
+Somebody worried about money cannot do their best work. So we take that worry off the table: \
+pay starts at a living wage for your city, nobody loses their job for not being good enough at \
+it, and when times are hard we would rather everybody suffered a little than anybody suffered \
+a lot."""
+
+[[values.items]]
+title = "Work-Life Balance"
+body = """
+We understand that people are parents, caregivers, friends and neighbors, not just workers. \
+Everybody gets one life, so we want you to make the most of yours. We are people too, which \
+is why you get what we would give ourselves: time that is genuinely yours, and a job built to \
+leave room for a life outside work."""
+
+[[values.items]]
+title = "Mentorship and Learning"
+body = """
+Through learning we flourish. Nobody arrives knowing everything, and a job here is meant to \
+leave you better at your craft than it found you. You get work that is a little beyond you, \
+and somebody beside you while you learn it. A trade stays alive by passing from one person to \
+the next, so teaching is counted as work and paid as work."""
+
+[team]
+eyebrow = "Who's Behind It"
+# Slugs of files in content/people, in display order.
+people = ["adit-shah"]

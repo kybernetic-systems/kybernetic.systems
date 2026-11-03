@@ -1,0 +1,32 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+import { ContrastTable, PaletteSwatches } from "./Foundations";
+
+<Meta title="Foundations/Colors & Contrast" />
+
+# Colors & Contrast
+
+The site targets **WCAG 2.2 AA**. Components use only the semantic tokens below, so contrast is
+decided here once and can't drift inside a component. A section sets `data-tone="ink"` and every
+token inside it switches to its ink value.
+
+## Brand palette
+
+Raw colours, for the theme and these docs only.
+
+<PaletteSwatches />
+
+`brass` (3.40:1 on paper) is used for rules, arrows and large text only. Small accent text on paper
+uses `brass-deep` (4.61:1).
+
+## Semantic tokens on paper
+
+<div data-tone="paper" className="p-6">
+	<ContrastTable tone="paper" />
+</div>
+
+## Semantic tokens on ink
+
+<div data-tone="ink" className="p-6">
+	<ContrastTable tone="ink" />
+</div>

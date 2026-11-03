@@ -1,0 +1,35 @@
+{
+	"include": ["**/*", ".storybook/**/*"],
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"lib": ["ESNext", "DOM", "DOM.Iterable"],
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"paths": {
+			"#/*": ["./src/*"],
+			"#content/*": ["./content/*"],
+			"#content-collections": ["./vite-plugins/.content-collections/generated"],
+			"#scripts/*": ["./scripts/*"],
+			"#storybook/*": ["./.storybook/*"]
+		},
+		"types": ["vite/client", "vite-plus/test/browser-playwright", "vite-plugin-svgr/client"],
+		"noEmit": true,
+		"allowImportingTsExtensions": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"verbatimModuleSyntax": true,
+		"skipLibCheck": true,
+		"allowUnreachableCode": false,
+		"allowUnusedLabels": false,
+		"exactOptionalPropertyTypes": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"noUncheckedIndexedAccess": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"strict": true
+	}
+}

@@ -1,0 +1,88 @@
+featuredPostCount = 3
+
+[seo]
+title = "Kybernetic Systems — Through Learning We Flourish"
+
+[hero]
+eyebrow = "Kybernetic Systems Private Limited"
+titleLines = ["Through Learning", "We Flourish"]
+lead = """
+We build systems that serve people and unlock human \
+potential, so that together we may shape a better world."""
+markLabel = "The helm and ouroboros mark of Kybernetic Systems"
+
+[cause]
+eyebrow = "Our Cause"
+# Markdown: *text* is set in brass italics.
+statements = ["""
+We imagine a world where everyone has the freedom \
+and opportunity *not merely to survive, but to thrive*: \
+to live a life of dignity and fulfillment, realize their \
+potential, and shape their shared future.""", """
+The systems we adopt shape us, both as individuals \
+and as a society. We believe the best way to create the \
+world we envision is to build systems that *respect \
+human dignity* and *serve the needs of all*."""]
+
+[name]
+eyebrow = "The Name"
+word = "κυβερνήτης"
+transliteration = "kybernetes — helmsman"
+body = """
+Kybernetic comes from the Greek word *kybernetes*, which means helmsman. The helmsman
+holds the course of the ship by continuously sensing the effect of the rudder and correcting it
+against the shifting winds, currents, and tides.
+
+Just as the helmsman steers the ship toward a heading, we steer toward human flourishing by
+continuously learning and adapting. That is why our mark is a helm, for steering and adaptation,
+set inside an ouroboros, for continuous learning and feedback."""
+
+[principles]
+eyebrow = "How We Work"
+
+[[principles.items]]
+title = "Find a bad system"
+body = """
+A bad system is one that doesn't work for \
+everyone participating in it. People end up \
+serving the system, instead of the system \
+serving them."""
+
+[[principles.items]]
+title = "Redesign for humans"
+body = """
+Start with the people it affects. Give them the \
+autonomy to work the way they want, and the \
+support to do more of what people are good at."""
+
+[[principles.items]]
+title = "Adapt continuously"
+body = """
+Build the smallest version that works for \
+everyone in it. Then listen to the people using \
+it, and let what comes back change the design."""
+
+[productsTeaser]
+eyebrow = "Products"
+title = """
+Everybody accepts one bargain: to work with other people, you hand your work to somebody \
+else."""
+body = """
+Mangrove is a place to build the things a group needs — a household budget, a shared list of \
+chores, everything a company runs on — and keep them on the computers you already own."""
+linkLabel = "See Mangrove"
+href = "/mangrove"
+
+[careersTeaser]
+eyebrow = "Careers"
+title = "Learning and teaching are part of the job."
+body = """
+A paid internship is open in Mumbai. What a job here pays, and how long it is meant to last, are \
+written down before you ask."""
+linkLabel = "Roles and how we hire"
+href = "/careers"
+
+[blogTeaser]
+eyebrow = "Blog"
+linkLabel = "All posts"
+href = "/blog"

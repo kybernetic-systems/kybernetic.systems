@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@import "@fontsource-variable/eb-garamond/wght.css";
+@import "@fontsource-variable/eb-garamond/wght-italic.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "./styles/theme.css";
+@import "./styles/base.css";
+@import "./styles/utilities.css";
+
+/*
+ * Animations run only when the viewer hasn't asked for reduced motion. Storybook's motion toggle sets
+ * `data-reduced-motion` on the root to preview the reduced state.
+ */
+@custom-variant motion-safe {
+	@media (prefers-reduced-motion: no-preference) {
+		&:where(:root:not([data-reduced-motion]) *) {
+			@slot;
+		}
+	}
+}

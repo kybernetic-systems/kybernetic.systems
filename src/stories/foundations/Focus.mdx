@@ -1,0 +1,13 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+import { FocusDemo } from "./Foundations";
+
+<Meta title="Foundations/Focus" />
+
+# Focus
+
+Every focusable element gets a 2px outline in the `focus` token (navy on paper, brass on ink), offset
+by 4px. It's defined once in the base styles and never removed. The sticky header reserves scroll
+padding so it can't cover a focused element (WCAG 2.4.11).
+
+<FocusDemo />

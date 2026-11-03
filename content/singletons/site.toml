@@ -1,0 +1,84 @@
+# Company-wide details. Everything here appears in more than one place (header, footer, contact
+# page, legal documents), so it's written once. Markdown elsewhere can use these placeholders:
+# {site.legalName} {site.shortName} {site.email} {site.phone} {site.cin} {site.registeredOffice}
+
+legalName = "Kybernetic Systems Private Limited"
+shortName = "Kybernetic Systems"
+motto = "Through learning we flourish"
+description = """
+We build systems that serve people and unlock human \
+potential, so that together we may shape a better world."""
+url = "https://kybernetic.systems"
+cin = "U62099MH2026PTC473103"
+email = "adit.shah@kybernetic.systems"
+# Slug of the person in content/people who handles queries and grievances.
+grievanceOfficer = "adit-shah"
+statutoryNote = "Disclosures per Section 12, Companies Act 2013 read with Rule 26."
+
+nav = [
+	{ label = "About", href = "/about" },
+	{ label = "Products", href = "/products" },
+	{ label = "Blog", href = "/blog" },
+	{ label = "Careers", href = "/careers" },
+	{ label = "Contact", href = "/contact" },
+]
+
+footerLinks = [
+	{ label = "Home", href = "/" },
+	{ label = "About", href = "/about" },
+	{ label = "Products", href = "/products" },
+	{ label = "Blog", href = "/blog" },
+	{ label = "Careers", href = "/careers" },
+	{ label = "Contact", href = "/contact" },
+	{ label = "Privacy Policy", href = "/privacy" },
+	{ label = "Terms of Use", href = "/terms" },
+]
+
+[incorporation]
+year = 2026
+country = "India"
+
+[registeredOffice]
+lines = [
+	"27 Meera Building",
+	"18 L.D. Ruparel Marg",
+	"Malabar Hill, Mumbai — 400006",
+	"Maharashtra, India",
+]
+
+[phone]
+display = "+91 74000 38006"
+e164 = "+917400038006"
+
+[ogImage]
+src = "/og/default.png"
+alt = "Kybernetic Systems — Through Learning We Flourish"
+width = 1200
+height = 630
+
+# Pre-filled emails behind the site's email buttons.
+[mailto]
+contact = {}
+
+[mailto.notify]
+subject = "Notify me about new Kybernetic products"
+body = "Please email me when there is something new from Kybernetic Systems."
+
+[mailto.openApplication]
+subject = "Open application"
+body = """
+A phone number to reach me on:
+
+Days and times I am free for a ten minute call:
+
+What I want to learn on the job:
+
+The kind of work I am hoping to do here:"""
+
+[mailto.role]
+body = """
+A phone number to reach me on:
+
+Days and times I am free for a ten minute call:
+
+What I want to learn on the job:"""

@@ -1,0 +1,129 @@
+# The Mangrove product site, served at https://mangrove.kybernetic.systems/ and routed
+# internally as /mangrove. See src/lib/subdomain.ts for the host-to-path rewrite.
+
+[seo]
+title = "Mangrove"
+description = """
+Build the things a group needs — a household budget, a shared list of chores, a company's chat \
+and records — and run them on the computers you already own."""
+
+[hero]
+eyebrow = "Mangrove"
+title = "Working together should not cost you your work."
+lead = """
+Mangrove is a place to build the things a group needs and share them: a household budget, a \
+list of chores, a company's chat and records. They run on the computers you already have, \
+everyone holds their own copy of what they are allowed to see, and what passes between you \
+does not have to pass through anybody else."""
+
+[premise]
+eyebrow = "The Premise"
+# Markdown: *text* is set in brass italics.
+statements = ["""
+A program on your own computer is yours, and it is solitary. The moment two people need the \
+same list, the same accounts or the same conversation, the work moves onto *machines that \
+belong to somebody else*.""", """
+Mangrove closes that gap. An app needs somewhere to keep information, something to do the work, \
+and a way to reach people — and *all three can be the computers you already own*."""]
+
+[uses]
+eyebrow = "What You Can Make"
+
+[[uses.items]]
+title = "Money, for a household"
+body = """
+Both of you record what you spend as you spend it. At the end of the month you have a real set \
+of accounts: what came in, what went out, what you own and what you owe. Set a budget, plan a \
+holiday, follow your investments."""
+
+[[uses.items]]
+title = "Money, between friends"
+body = """
+Who paid for dinner, who owes whom, settled at the end of the trip. The same bookkeeping that \
+runs a household runs a holiday for eight."""
+
+[[uses.items]]
+title = "The jobs around the house"
+body = """
+A list you both add to and tick off, which reminds you before a deadline arrives. Make it nag, \
+make it a game, make it whatever actually gets things done."""
+
+[[uses.items]]
+title = "Everything a company runs on"
+body = """
+Chat, calendar, the employee portal, customer records, the systems that run operations. The \
+same thing that holds a family's grocery money holds a company's ledger."""
+
+[[uses.items]]
+title = "Or something nobody has built"
+body = """
+Forms, views, charts, workflows, reminders, connections to software you already use. If you \
+could lay it out in a spreadsheet you can build it here — and unlike a spreadsheet, other \
+people can use it at the same time."""
+
+[howItWorks]
+eyebrow = "How It Works"
+
+[[howItWorks.items]]
+title = "Where it is kept"
+body = """
+What you are allowed to see, you hold — on your own computer, not borrowed from somewhere for \
+as long as you are allowed to borrow it. There is nothing to be cut off from."""
+
+[[howItWorks.items]]
+title = "Where work happens"
+body = """
+The computers you already have do the work. Nobody is renting someone else's machines to keep \
+a list of chores, and nothing waits on a connection to do what you just asked for."""
+
+[[howItWorks.items]]
+title = "How people connect"
+body = """
+Changes do have to reach people, and the route is yours to choose: an office network, the open \
+internet, Bluetooth across a table, a gateway you run yourself."""
+
+[sovereignty]
+eyebrow = "Sovereignty"
+body = """
+A program on your own computer has always been yours. It answers to nobody, it keeps working
+after the people who made it have moved on, and nothing about it changes because a price went
+up. What it cannot do is let several people work on the same thing at once. The moment you need
+that, the answer has been to rent it — and renting means the information, the work and the
+connections all sit somewhere you do not control.
+
+Mangrove keeps the first and adds the second. Ownership here works the way it works everywhere
+else: everything has an owner, and an owner is a person or an organization, or several of them
+together when something is genuinely shared. An organization owns in its own right, through an
+account of its own rather than one belonging to whoever set it up — the same separation that
+makes a company something other than its founders. Owners decide who may hold a copy and which
+parts they get, and a copy carries the terms it came with, the way a book or a piece of software
+does.
+
+That is affordable because Mangrove is built on trust rather than suspicion. Some systems spend
+enormous effort proving that strangers cannot cheat each other. A group answered that question
+long before any software arrived: people are invited, introduced and handed the keys. Checking
+what someone is allowed to do is cheap. Proving that strangers cannot cheat is not. Mangrove
+assumes people who know each other, and spends the difference on being quick.
+
+And because everything sits on the same ground, the things you build know about each other. The
+budget knows about the calendar, and the list of chores knows about the conversation. Nothing
+has to be joined up afterward, and the parts that do not fit the way you work are parts you can
+change."""
+
+[notify]
+title = "Know when Mangrove is ready"
+body = "One email, when there is something to use. Nothing else, ever."
+ctaLabel = "Email us to be notified"
+privacyNote = """
+Sending this email asks us to store your email address for this one purpose. Withdraw any \
+time — see our [privacy policy](/privacy)."""
+
+[company]
+eyebrow = "Who Builds It"
+title = "Mangrove is built by Kybernetic Systems."
+body = """
+We have written down what this company is for: who gets a say in a decision, how the people \
+who build this are treated, and why you should never need us in order to keep using it. \
+Mangrove is the first thing we have built, and that list is what it answers to."""
+linkLabel = "Read what we value"
+href = "/about#values"

@@ -1,0 +1,13 @@
+backLabel = "All posts"
+readNextEyebrow = "Read next"
+readNextCount = 3
+
+[seo]
+title = "Blog"
+description = "What we are building, what we got wrong, and how the things we make actually work."
+
+[intro]
+eyebrow = "Blog"
+title = "We write down what we work out."
+lead = """
+Notes on what we are building, what we got wrong, and how the things we make actually work."""

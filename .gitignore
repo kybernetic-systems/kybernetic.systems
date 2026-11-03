@@ -1,0 +1,10 @@
+node_modules/
+.tanstack/
+dist/
+
+# Storybook
+*storybook.log
+storybook-static
+
+# Content Collections
+.content-collections

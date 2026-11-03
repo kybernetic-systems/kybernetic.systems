@@ -1,0 +1,23 @@
+{
+	"editor.rulers": [100],
+	"editor.formatOnSave": true,
+	"editor.formatOnSaveMode": "file",
+	"editor.defaultFormatter": "oxc.oxc-vscode",
+	"[javascript]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
+	"[javascriptreact]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
+	"[typescript]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
+	"[typescriptreact]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
+	"editor.codeActionsOnSave": { "source.fixAll.oxc": "always" },
+	"js/ts.experimental.useTsgo": true,
+	"js/ts.tsdk.path": "./node_modules/typescript",
+	"js/ts.updateImportsOnFileMove.enabled": "always",
+	"js/ts.updateImportsOnPaste.enabled": true,
+	"mdx.server.enable": true,
+	"npm.scriptRunner": "vp",
+	"oxc.disableNestedConfig": true,
+	"oxc.fmt.disableNestedConfig": true,
+	"files.readonlyInclude": { "**/routeTree.gen.ts": true },
+	"files.watcherExclude": { "**/routeTree.gen.ts": true },
+	"search.exclude": { "**/routeTree.gen.ts": true },
+	"package-json-upgrade.minimumReleaseAge": 10080
+}

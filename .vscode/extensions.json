@@ -1,0 +1,20 @@
+{
+	"recommendations": [
+		"aaron-bond.better-comments",
+		"editorconfig.editorconfig",
+		"tamasfe.even-better-toml",
+		"github.vscode-github-actions",
+		"github.vscode-pull-request-github",
+		"eamodio.gitlens",
+		"ecmel.vscode-html-css",
+		"davidanson.vscode-markdownlint",
+		"unifiedjs.vscode-mdx",
+		"christian-kohler.npm-intellisense",
+		"codeandstuff.package-json-upgrade",
+		"ryu1kn.partial-diff",
+		"csstools.postcss",
+		"bradlc.vscode-tailwindcss",
+		"typescriptteam.native-preview",
+		"voidzero.vite-plus-extension-pack"
+	]
+}
