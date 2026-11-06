@@ -1,7 +1,7 @@
 ---
 title: Internship
 status: open
-timing: Starting now
+timing: Start any time
 summary: >-
   We still teach people to build software. Three to six months in Mumbai, paid, on work that
   reaches real people — long enough to get it wrong, fix it, and understand why.
