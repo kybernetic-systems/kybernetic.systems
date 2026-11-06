@@ -1,8 +1,13 @@
 name: CI
 
-# Manual only. Nothing in this repository runs without someone asking for it, so a run always
-# corresponds to a person deciding the commit is worth checking.
+# Checks run on every pull request, so merging into main can be gated on them: a required status
+# check only clears when a run reports against the pull request's own commit, which a manual run
+# does not do. Nothing here reads a secret — the Cloudflare credentials live on the production
+# environment, which only the deploy workflow names — so an automatic run holds no credentials.
+#
+# Dispatch is kept as well, for running the checks against main without opening a pull request.
 on:
+  pull_request:
   workflow_dispatch:
 
 permissions:
