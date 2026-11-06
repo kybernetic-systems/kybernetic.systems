@@ -31,9 +31,15 @@ jobs:
       # Story tests run in a real browser, which the runner does not have.
       - run: vp exec playwright install --with-deps chromium
 
+      # First, because it writes `vite-plugins/.content-collections/generated`, which is
+      # gitignored and which `#content-collections` resolves to. Without it every module that
+      # reads content is untyped and the type check fails on a clean checkout, as it does for
+      # anyone running `vp check` in a fresh clone. Building also fails here, rather than at
+      # deploy, if the prerender breaks.
+      - run: vp build
+
       - run: vp check
       - run: vp test --run
 
-      # Build and split, so a broken prerender or host split fails here rather than at deploy.
-      - run: vp build
+      # Last, so a broken host split fails here rather than at deploy.
       - run: vp run hosts
