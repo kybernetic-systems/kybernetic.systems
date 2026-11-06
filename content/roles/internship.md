@@ -10,7 +10,7 @@ location: Mumbai · in person
 employmentType: INTERN
 compensation: ₹20,000 per month
 baseSalary: { currency: INR, value: 20000, unit: MONTH }
-postedAt: 2026-10-26
+postedAt: 2026-11-06
 order: 1
 ---
 
