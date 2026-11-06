@@ -1,0 +1,8 @@
+version: 2
+updates:
+  # Workflow `uses:` references are pinned to exact versions, which cannot pick up a fix on their
+  # own. Vite+ recommends this for `setup-vp`, whose `v1` tag is no longer updated.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

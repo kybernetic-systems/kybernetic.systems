@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+# One run per branch. A superseded run has nothing left to publish, and two deploys racing to the
+# same Worker would leave whichever finished last live, not whichever commit is newer.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+
+      # Pinned exactly: the `v1` tag no longer receives updates. `vp migrate` moves this forward.
+      - uses: voidzero-dev/setup-vp@v1.22.0
+        with:
+          node-version: "26"
+          cache: true
+
+      - run: vp install
+
+      # Story tests run in a real browser, which the runner does not have.
+      - run: vp exec playwright install --with-deps chromium
+
+      - run: vp check
+      - run: vp test --run
+
+      - run: vp build
+      # Splits the one built tree into the per-host trees the two Workers serve.
+      - run: vp run hosts
+
+      # Checks and tests have passed on the commit that is about to be published, and the trees
+      # being uploaded are the ones they ran against.
+      - name: Deploy
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          vp run deploy:site
+          vp run deploy:mangrove
