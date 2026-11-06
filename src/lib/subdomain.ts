@@ -12,7 +12,8 @@ export const products = { mangrove: { label: "Mangrove" } } as const;
 
 export type ProductSubdomain = keyof typeof products;
 
-function isProduct(value: string | undefined): value is ProductSubdomain {
+/** Whether `value` names a product served from this route tree. */
+export function isProduct(value: string | undefined): value is ProductSubdomain {
 	return value !== undefined && Object.hasOwn(products, value);
 }
 

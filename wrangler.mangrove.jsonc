@@ -1,0 +1,28 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	// Mangrove, served from `dist/mangrove` as static assets with no Worker script. Its pages are
+	// re-rooted out of the company build by `vp run hosts`, so what the build writes to
+	// `/mangrove/index.html` is served here as `/`. Asset requests never invoke a Worker, so none
+	// of the request or CPU limits apply to them.
+	//
+	// `routes` attaches the subdomain, which requires the zone to already exist in this Cloudflare
+	// account: move the domain's nameservers first, or the deploy fails here.
+	"name": "kybernetic-systems-mangrove",
+	// The newest date the `workerd` shipped with the pinned wrangler accepts; a later one makes
+	// `vp run preview` refuse to start. An assets-only Worker runs no script for this to gate, so
+	// it only needs to stay in step with the runtime that serves the preview.
+	"compatibility_date": "2026-10-30",
+	"assets": {
+		"directory": "./dist/mangrove",
+		// Mangrove's pages link to `/about`-style paths, never `/about/`. The default
+		// `auto-trailing-slash` would serve both and canonicalize to the slash, against the choice
+		// the prerender config makes.
+		"html_handling": "drop-trailing-slash",
+		"not_found_handling": "404-page",
+	},
+	"routes": [{ "pattern": "mangrove.kybernetic.systems", "custom_domain": true }],
+	// Mangrove has one address. A `workers.dev` or preview copy would be a second one serving the
+	// same pages, which search engines are free to index in place of the real thing.
+	"workers_dev": false,
+	"preview_urls": false,
+}
