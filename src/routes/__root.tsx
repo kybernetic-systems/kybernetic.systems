@@ -16,7 +16,7 @@ import markSvg from "#/components/primitives/Logo/mark.svg?url";
 import { getPerson, getSite } from "#/content/api";
 import { PublicOriginProvider } from "#/lib/origin";
 import type { ProductSubdomain } from "#/lib/subdomain";
-import { productForPath, productOrigin, products } from "#/lib/subdomain";
+import { productForPath, productOrigin, products, publicHref } from "#/lib/subdomain";
 import { NotFoundPage } from "#/pages/NotFoundPage";
 
 import globalCss from "#/global.css?url";
@@ -30,28 +30,43 @@ export const Route = createRootRoute({
 			year: new Date().getUTCFullYear(),
 		};
 	},
-	head: ({ loaderData }) => ({
-		meta: [
-			{ charSet: "utf-8" },
-			{ name: "viewport", content: "width=device-width, initial-scale=1" },
-			{ name: "theme-color", content: "#0a1a3a" },
-			{ name: "apple-mobile-web-app-title", content: "Kybernetics" },
-			// Every page sets its own title; this one is left for addresses that don't match a page.
-			{ title: loaderData ? `Page not found · ${loaderData.site.shortName}` : "Page not found" },
-		],
-		links: [
-			{ rel: "preload", href: serifFont, as: "font", type: "font/woff2", crossOrigin: "anonymous" },
-			{ rel: "stylesheet", href: globalCss },
-			{ rel: "icon", type: "image/png", href: "/favicon-96x96.png", sizes: "96x96" },
-			{ rel: "icon", type: "image/svg+xml", href: markSvg },
-			{ rel: "shortcut icon", href: "/favicon.ico" },
-			{ rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" },
-			{ rel: "manifest", href: "/site.webmanifest" },
-			{ rel: "alternate", type: "application/rss+xml", title: "Blog", href: "/blog/rss.xml" },
-		],
-		// The company's own `Organization` markup belongs on a single page, so it lives in the home
-		// route rather than here, where it would repeat on every page of the site.
-	}),
+	head: ({ loaderData, matches }) => {
+		// The blog belongs to the company, so on a product subdomain its feed has to be named by
+		// full URL: a relative one would point at a path that host does not serve.
+		const origin = loaderData
+			? publicOrigin(loaderData.site.url, productForPath(matches.at(-1)?.pathname ?? "/"))
+			: undefined;
+		const rssHref = origin ? publicHref("/blog/rss.xml", origin) : "/blog/rss.xml";
+
+		return {
+			meta: [
+				{ charSet: "utf-8" },
+				{ name: "viewport", content: "width=device-width, initial-scale=1" },
+				{ name: "theme-color", content: "#0a1a3a" },
+				{ name: "apple-mobile-web-app-title", content: "Kybernetics" },
+				// Every page sets its own title; this one is left for addresses that don't match a page.
+				{ title: loaderData ? `Page not found · ${loaderData.site.shortName}` : "Page not found" },
+			],
+			links: [
+				{
+					rel: "preload",
+					href: serifFont,
+					as: "font",
+					type: "font/woff2",
+					crossOrigin: "anonymous",
+				},
+				{ rel: "stylesheet", href: globalCss },
+				{ rel: "icon", type: "image/png", href: "/favicon-96x96.png", sizes: "96x96" },
+				{ rel: "icon", type: "image/svg+xml", href: markSvg },
+				{ rel: "shortcut icon", href: "/favicon.ico" },
+				{ rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" },
+				{ rel: "manifest", href: "/site.webmanifest" },
+				{ rel: "alternate", type: "application/rss+xml", title: "Blog", href: rssHref },
+			],
+			// The company's own `Organization` markup belongs on a single page, so it lives in the
+			// home route rather than here, where it would repeat on every page of the site.
+		};
+	},
 	component: RootComponent,
 	notFoundComponent: NotFoundPage,
 	shellComponent: RootDocument,
