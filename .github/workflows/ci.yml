@@ -1,14 +1,11 @@
 name: CI
 
-# Checks run on every pull request, so merging into main can be gated on them: a required status
-# check only clears when a run reports against the pull request's own commit, which a manual run
-# does not do. Nothing here reads a secret — the Cloudflare credentials live on the production
-# environment, which only the deploy workflow names — so an automatic run holds no credentials.
-#
-# Dispatch is kept as well, for running the checks against main without opening a pull request.
+# Pull requests only, so merging into main can be gated on these checks: a required status check
+# clears when a run reports against the pull request's own commit. Nothing here reads a secret —
+# the Cloudflare credentials belong to the production environment, which only the deploy workflow
+# names — so running on every pull request grants nothing. Publishing stays a manual dispatch.
 on:
   pull_request:
-  workflow_dispatch:
 
 permissions:
   contents: read
