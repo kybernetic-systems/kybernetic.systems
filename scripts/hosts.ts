@@ -22,6 +22,12 @@ const BUILD_ONLY = new Set(["pages.json"]);
 /** Written per host, so no host inherits another's copy. */
 const PER_HOST = new Set(["robots.txt", "sitemap.xml"]);
 
+/** Hashed filenames: the content behind one never changes, so it never needs revalidating. */
+const IMMUTABLE = "public, max-age=31536000, immutable";
+
+/** Stable filenames, which a new build can change underneath: short enough to pick that up. */
+const STABLE = "public, max-age=86400";
+
 /**
  * Directories of host-agnostic files every tree needs. The whole of `assets` travels because
  * router chunks load on demand, so a page's HTML names only the ones it starts with.
@@ -92,6 +98,71 @@ export function productManifest(manifest: string, label: string): string {
 	return `${JSON.stringify({ ...parsed, name: label, short_name: label }, undefined, 2)}\n`;
 }
 
+/**
+ * Response headers for one host.
+ *
+ * Cloudflare serves every asset `max-age=0, must-revalidate` unless told otherwise, so the hashed
+ * bundle is revalidated on each page load for nothing. Cache lifetimes are set only where they
+ * differ from that default: HTML keeps it, because a page's address stays the same while its
+ * content changes. Rules are additive and a header set twice has its values joined with a comma,
+ * so `Cache-Control` appears in the narrow rules only, never in the catch-all.
+ *
+ * `script-src` has to allow inline code: the prerenderer emits the router's serialized state and
+ * the JSON-LD block inline, and nonces would need a Worker to generate them. Everything an
+ * attacker could otherwise reach for is closed off instead.
+ *
+ * HSTS deliberately omits `includeSubDomains`. Each product subdomain is served by its own tree
+ * with its own copy of this file, so each one asserts the policy for itself, and no subdomain
+ * added later is committed to HTTPS before it is ready.
+ */
+export function headersFile(entries: string[]): string {
+	const csp = [
+		"default-src 'self'",
+		"script-src 'self' 'unsafe-inline'",
+		"style-src 'self' 'unsafe-inline'",
+		"img-src 'self' data:",
+		"font-src 'self'",
+		"connect-src 'self'",
+		"manifest-src 'self'",
+		"base-uri 'self'",
+		"form-action 'none'",
+		"frame-ancestors 'none'",
+		"object-src 'none'",
+	].join("; ");
+
+	const blocks = [
+		[
+			"# Every response from this host.",
+			"/*",
+			"  X-Content-Type-Options: nosniff",
+			"  Referrer-Policy: strict-origin-when-cross-origin",
+			"  X-Frame-Options: DENY",
+			"  Cross-Origin-Opener-Policy: same-origin",
+			"  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+			"  Strict-Transport-Security: max-age=31536000",
+			`  Content-Security-Policy: ${csp}`,
+		].join("\n"),
+		["# Content-hashed by the build.", "/assets/*", `  Cache-Control: ${IMMUTABLE}`].join("\n"),
+	];
+
+	// Icons, the manifest and the social card keep their names between builds, so they are
+	// revalidated daily rather than held for a year.
+	const stable = entries
+		.filter((entry) => /\.(?:png|ico|svg|webmanifest)$/.test(entry) && !entry.startsWith("assets/"))
+		.map((entry) => `/${entry}`)
+		.toSorted((a, b) => a.localeCompare(b));
+	if (stable.length > 0) {
+		blocks.push(
+			[
+				"# Stable names, replaced in place by a build.",
+				...stable.flatMap((file) => [file, `  Cache-Control: ${STABLE}`]),
+			].join("\n"),
+		);
+	}
+
+	return `${blocks.join("\n\n")}\n`;
+}
+
 /** Which built file belongs in which published tree, and what each tree has written for it. */
 export function planHosts(options: {
 	entries: string[];
@@ -104,14 +175,17 @@ export function planHosts(options: {
 	const belongsToProduct = (entry: string) =>
 		productNames.some((name) => entry === name || entry.startsWith(`${name}/`));
 
+	const siteFiles = entries
+		.filter((entry) => !BUILD_ONLY.has(entry) && !belongsToProduct(entry))
+		.map((entry) => ({ to: entry, from: entry }));
+
 	const site: HostPlan = {
 		name: "site",
 		origin: new URL(siteUrl).origin,
 		files: [
-			...entries
-				.filter((entry) => !BUILD_ONLY.has(entry) && !belongsToProduct(entry))
-				.map((entry) => ({ to: entry, from: entry })),
+			...siteFiles,
 			{ to: "_redirects", content: redirectsFile(siteUrl) },
+			{ to: "_headers", content: headersFile(siteFiles.map((file) => file.to)) },
 		],
 	};
 
@@ -128,6 +202,8 @@ export function planHosts(options: {
 				(isShared(entry) || (isRootLevel(entry) && !entry.endsWith(".html"))),
 		);
 
+		const served = [...pages.map((page) => page.to), ...support, "site.webmanifest"];
+
 		return {
 			name,
 			origin,
@@ -135,6 +211,7 @@ export function planHosts(options: {
 				...pages,
 				...support.map((entry) => ({ to: entry, from: entry })),
 				{ to: "site.webmanifest", content: productManifest(manifest, products[name].label) },
+				{ to: "_headers", content: headersFile(served) },
 				{ to: "robots.txt", content: robotsTxt(origin) },
 				{
 					to: "sitemap.xml",

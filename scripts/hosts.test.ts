@@ -2,6 +2,7 @@ import { describe, expect, it } from "vite-plus/test";
 
 import {
 	type HostPlan,
+	headersFile,
 	planHosts,
 	productManifest,
 	redirectsFile,
@@ -213,5 +214,71 @@ describe("planHosts", () => {
 		for (const host of ["site", "mangrove"]) {
 			expect(destinations(host)).toHaveLength(new Set(destinations(host)).size);
 		}
+	});
+});
+
+describe("headersFile", () => {
+	const headers = headersFile([
+		"index.html",
+		"assets/app-abc123.js",
+		"favicon.ico",
+		"og/default.png",
+	]);
+
+	it("hardens every response", () => {
+		expect(headers).toContain("X-Content-Type-Options: nosniff");
+		expect(headers).toContain("X-Frame-Options: DENY");
+		expect(headers).toContain("Referrer-Policy: strict-origin-when-cross-origin");
+		expect(headers).toContain("Strict-Transport-Security: max-age=31536000");
+	});
+
+	it("leaves no subdomain committed to HTTPS on another host's behalf", () => {
+		expect(headers).not.toContain("includeSubDomains");
+	});
+
+	it("closes off what the site never uses", () => {
+		expect(headers).toContain("frame-ancestors 'none'");
+		expect(headers).toContain("object-src 'none'");
+		expect(headers).toContain("form-action 'none'");
+		expect(headers).toContain("base-uri 'self'");
+	});
+
+	it("allows the inline script the prerenderer emits, and nothing remote", () => {
+		expect(headers).toContain("script-src 'self' 'unsafe-inline'");
+		expect(headers).toContain("default-src 'self'");
+		expect(headers).not.toContain("http://");
+	});
+
+	it("caches the hashed bundle for a year", () => {
+		expect(headers).toContain("/assets/*\n  Cache-Control: public, max-age=31536000, immutable");
+	});
+
+	it("caches files whose names survive a build for a day instead", () => {
+		expect(headers).toContain("/favicon.ico\n  Cache-Control: public, max-age=86400");
+		expect(headers).toContain("/og/default.png\n  Cache-Control: public, max-age=86400");
+	});
+
+	it("leaves pages on Cloudflare's revalidating default", () => {
+		expect(headers).not.toContain("/index.html");
+		// Cache-Control set twice for one path would be joined with a comma, so the catch-all
+		// block must not carry one.
+		const catchAll = headers.slice(headers.indexOf("/*"), headers.indexOf("/assets/*"));
+		expect(catchAll).not.toContain("Cache-Control");
+	});
+
+	it("stays inside the per-line limit Cloudflare enforces", () => {
+		for (const line of headers.split("\n")) expect(line.length).toBeLessThanOrEqual(2000);
+	});
+});
+
+describe("planHosts, headers", () => {
+	it("writes one to every host", () => {
+		for (const host of ["site", "mangrove"]) {
+			expect(destinations(host)).toContain("_headers");
+		}
+	});
+
+	it("gives the product tree a rule for its own renamed manifest", () => {
+		expect(generated("mangrove", "_headers")).toContain("/site.webmanifest");
 	});
 });
