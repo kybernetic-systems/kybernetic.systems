@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as R404RouteImport } from './routes/404'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -21,10 +22,16 @@ import { Route as BlogRssDotxmlRouteImport } from './routes/blog/rss[.]xml'
 import { Route as CareersIndexRouteImport } from './routes/careers/index'
 import { Route as CareersSlugRouteImport } from './routes/careers/$slug'
 import { Route as MangroveIndexRouteImport } from './routes/mangrove/index'
+import { Route as Mangrove404RouteImport } from './routes/mangrove/404'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const R404Route = R404RouteImport.update({
+  id: '/404',
+  path: '/404',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -82,9 +89,15 @@ const MangroveIndexRoute = MangroveIndexRouteImport.update({
   path: '/mangrove/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Mangrove404Route = Mangrove404RouteImport.update({
+  id: '/mangrove/404',
+  path: '/mangrove/404',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/404': typeof R404Route
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
@@ -93,12 +106,14 @@ export interface FileRoutesByFullPath {
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/careers/$slug': typeof CareersSlugRoute
+  '/mangrove/404': typeof Mangrove404Route
   '/blog/': typeof BlogIndexRoute
   '/careers/': typeof CareersIndexRoute
   '/mangrove/': typeof MangroveIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/404': typeof R404Route
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
@@ -107,6 +122,7 @@ export interface FileRoutesByTo {
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/careers/$slug': typeof CareersSlugRoute
+  '/mangrove/404': typeof Mangrove404Route
   '/blog': typeof BlogIndexRoute
   '/careers': typeof CareersIndexRoute
   '/mangrove': typeof MangroveIndexRoute
@@ -114,6 +130,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/404': typeof R404Route
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
@@ -122,6 +139,7 @@ export interface FileRoutesById {
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/careers/$slug': typeof CareersSlugRoute
+  '/mangrove/404': typeof Mangrove404Route
   '/blog/': typeof BlogIndexRoute
   '/careers/': typeof CareersIndexRoute
   '/mangrove/': typeof MangroveIndexRoute
@@ -130,6 +148,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/404'
     | '/about'
     | '/contact'
     | '/privacy'
@@ -138,12 +157,14 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/blog/rss.xml'
     | '/careers/$slug'
+    | '/mangrove/404'
     | '/blog/'
     | '/careers/'
     | '/mangrove/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/404'
     | '/about'
     | '/contact'
     | '/privacy'
@@ -152,12 +173,14 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/blog/rss.xml'
     | '/careers/$slug'
+    | '/mangrove/404'
     | '/blog'
     | '/careers'
     | '/mangrove'
   id:
     | '__root__'
     | '/'
+    | '/404'
     | '/about'
     | '/contact'
     | '/privacy'
@@ -166,6 +189,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/blog/rss.xml'
     | '/careers/$slug'
+    | '/mangrove/404'
     | '/blog/'
     | '/careers/'
     | '/mangrove/'
@@ -173,6 +197,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  R404Route: typeof R404Route
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -181,6 +206,7 @@ export interface RootRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
   BlogRssDotxmlRoute: typeof BlogRssDotxmlRoute
   CareersSlugRoute: typeof CareersSlugRoute
+  Mangrove404Route: typeof Mangrove404Route
   BlogIndexRoute: typeof BlogIndexRoute
   CareersIndexRoute: typeof CareersIndexRoute
   MangroveIndexRoute: typeof MangroveIndexRoute
@@ -193,6 +219,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/404': {
+      id: '/404'
+      path: '/404'
+      fullPath: '/404'
+      preLoaderRoute: typeof R404RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -272,11 +305,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MangroveIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mangrove/404': {
+      id: '/mangrove/404'
+      path: '/mangrove/404'
+      fullPath: '/mangrove/404'
+      preLoaderRoute: typeof Mangrove404RouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  R404Route: R404Route,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   PrivacyRoute: PrivacyRoute,
@@ -285,6 +326,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogSlugRoute: BlogSlugRoute,
   BlogRssDotxmlRoute: BlogRssDotxmlRoute,
   CareersSlugRoute: CareersSlugRoute,
+  Mangrove404Route: Mangrove404Route,
   BlogIndexRoute: BlogIndexRoute,
   CareersIndexRoute: CareersIndexRoute,
   MangroveIndexRoute: MangroveIndexRoute,

@@ -58,6 +58,14 @@ export default defineConfig({
 				// Served at mangrove.kybernetic.systems, so no link from this site points at it and
 				// it does not belong in this host's sitemap.
 				{ path: "/mangrove", sitemap: { exclude: true } },
+				// `autoSubfolderIndex: false` writes `404.html` beside the pages instead of
+				// `404/index.html`, which is where Cloudflare looks for a host's not-found page.
+				{ path: "/404", sitemap: { exclude: true }, prerender: { autoSubfolderIndex: false } },
+				{
+					path: "/mangrove/404",
+					sitemap: { exclude: true },
+					prerender: { autoSubfolderIndex: false },
+				},
 			],
 		}),
 		viteReact(),
