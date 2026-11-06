@@ -23,6 +23,12 @@ interface Content {
 	builder: Promise<Builder>;
 	/** Files Content Collections rejected during the build, collected for `strict()` to report. */
 	failures: string[];
+	/**
+	 * The one watch subscription on the shared builder. It belongs beside the builder rather than in
+	 * each plugin instance: `vp test` resolves this config several times, and two `watch()` calls on
+	 * one builder leave handles that unsubscribing the second does not release.
+	 */
+	watcher?: Promise<Watcher> | undefined;
 }
 
 /**
@@ -73,25 +79,21 @@ async function start(failures: string[]): Promise<Builder> {
  */
 function build(): Plugin {
 	const plugin = contentCollectionsPlugin({ configPath: configFile, isEnabled: () => false });
-	let watcher: Watcher | undefined;
 	return {
 		...plugin,
 		async buildStart() {
 			await content().builder;
 		},
 		async configureServer() {
-			/*
-			 * Vitest runs a dev server too, and a watcher there holds the process open until Vitest's
-			 * ten-second close timeout: https://github.com/sdorra/content-collections/issues/806. Tests
-			 * have no use for one, since nothing edits content mid-run.
-			 */
-			if (process.env["VITEST"] || watcher) return;
-			watcher = await (await content().builder).watch();
+			const shared = content();
+			shared.watcher ??= shared.builder.then((builder) => builder.watch());
+			await shared.watcher;
 		},
 		async closeBundle() {
-			// Unlike upstream, which drops the handle, the watcher is torn down with the server.
-			await watcher?.unsubscribe();
-			watcher = undefined;
+			const shared = content();
+			const pending = shared.watcher;
+			shared.watcher = undefined;
+			await (await pending)?.unsubscribe();
 		},
 	};
 }
