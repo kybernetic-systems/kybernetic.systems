@@ -1,0 +1,46 @@
+name: Deploy
+
+# Manual only, like CI. Publishing is a decision, not a consequence of merging.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Never cancel a deploy half-finished: the two hosts are published in sequence, and an
+# interrupted run would leave them on different versions.
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # The Cloudflare credentials live on this environment, so GitHub releases them only after its
+    # protection rules pass. The branch policy is enforced here rather than by a condition in this
+    # file, which anyone editing the file could change.
+    environment:
+      name: production
+      url: https://kybernetic.systems
+    steps:
+      - uses: actions/checkout@v7.0.1
+
+      - uses: voidzero-dev/setup-vp@v1.22.0
+        with:
+          node-version: "26"
+          cache: true
+
+      - run: vp install
+
+      # Built here rather than carried over from CI: a separate workflow cannot read another's
+      # artifacts without a token and a run id, and the build is deterministic from the commit.
+      - run: vp build
+      - run: vp run hosts
+
+      - name: Publish both hosts
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          vp run deploy:site
+          vp run deploy:mangrove

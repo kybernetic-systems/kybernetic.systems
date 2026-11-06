@@ -1,17 +1,15 @@
 name: CI
 
+# Manual only. Nothing in this repository runs without someone asking for it, so a run always
+# corresponds to a person deciding the commit is worth checking.
 on:
-  pull_request:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
 
-# One run per branch. A superseded run has nothing left to publish, and two deploys racing to the
-# same Worker would leave whichever finished last live, not whichever commit is newer.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -34,17 +32,6 @@ jobs:
       - run: vp check
       - run: vp test --run
 
+      # Build and split, so a broken prerender or host split fails here rather than at deploy.
       - run: vp build
-      # Splits the one built tree into the per-host trees the two Workers serve.
       - run: vp run hosts
-
-      # Checks and tests have passed on the commit that is about to be published, and the trees
-      # being uploaded are the ones they ran against.
-      - name: Deploy
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          vp run deploy:site
-          vp run deploy:mangrove
