@@ -23,8 +23,14 @@
 	"scripts": {
 		"build-storybook": "storybook build",
 		"content:status": "node scripts/content-status.ts",
+		"deploy": "vp build && vp run hosts && vp run deploy:site && vp run deploy:mangrove",
+		"deploy:mangrove": "wrangler deploy -c wrangler.mangrove.jsonc",
+		"deploy:site": "wrangler deploy -c wrangler.site.jsonc",
 		"githooks:install": "git config core.hooksPath .githooks",
+		"hosts": "node scripts/hosts.ts",
 		"og": "node scripts/og.ts",
+		"preview": "wrangler dev -c wrangler.site.jsonc",
+		"preview:mangrove": "wrangler dev -c wrangler.mangrove.jsonc",
 		"storybook": "storybook dev -p 6006"
 	},
 	"dependencies": {
@@ -91,16 +97,17 @@
 		"vite-plugin-svgr": "^5.2.0",
 		"vite-plus": "catalog:",
 		"vitest": "catalog:",
+		"wrangler": "^4.156.0",
 		"zod": "^4.6.5"
 	},
 	"devEngines": {
 		"packageManager": {
 			"name": "pnpm",
-			"version": "12.11.2",
+			"version": "12.18.0",
 			"onFail": "download"
 		}
 	},
 	"engines": {
-		"node": "26.12.0"
+		"node": "26.13.0"
 	}
 }

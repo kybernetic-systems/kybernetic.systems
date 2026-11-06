@@ -8,3 +8,6 @@ storybook-static
 
 # Content Collections
 .content-collections
+
+# Cloudflare
+.wrangler/
